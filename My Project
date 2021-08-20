@@ -1,15 +1,15 @@
 import pygame
-
+#imports pygame and all of its modules
 pygame.init()
 
 win = pygame.display.set_mode((750, 500))
-
+#set window size
 pygame.display.set_caption("Pong Game")
-
+#set window name to "Pong Game"
 white = (255, 255, 255)
 black = (0, 0, 0)
 
-
+#set classes for the pong Paddle and Ball
 class Paddle(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -29,7 +29,7 @@ class Ball(pygame.sprite.Sprite):
         self.dx = 1
         self.dy = 1
 
-
+#set paddles on the screen/sets paddle speed
 paddle1 = Paddle()
 paddle1.rect.x = 25
 paddle1.rect.y = 250
@@ -39,7 +39,7 @@ paddle2.rect.x = 715
 paddle2.rect.y = 225
 
 paddle_speed = 10
-
+#set ball in the middle of the screen
 pong = Ball()
 pong.rect.x = 375
 pong.rect.y = 250
@@ -47,7 +47,7 @@ pong.rect.y = 250
 all_sprites = pygame.sprite.Group()
 all_sprites.add(paddle1, paddle2, pong)
 
-
+#set text at the top "Pong Project"
 def redraw():
     win.fill(black)
     font = pygame.font.SysFont("Comic Sans MS", 30)
@@ -55,7 +55,7 @@ def redraw():
     textRect = text.get_rect()
     textRect.center = (750 // 2, 25)
     win.blit(text, textRect)
-
+#set player1 and player2's score
     # Player 1 Score
     p1_score = font.render(str(paddle1.points), False, white)
     p1Rect = p1_score.get_rect()
@@ -76,7 +76,7 @@ run = True
 
 while run:
     pygame.time.delay(100)
-
+#set controls for paddle and
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -91,7 +91,7 @@ while run:
         paddle2.rect.y += paddle_speed
     pong.rect.x += pong.speed * pong.dx
     pong.rect.y += pong.speed * pong.dy
-
+#sets border on the game and creates collide function. 
     if pong.rect.y > 490:
         pong.dy = -1
     if pong.rect.x > 740:
